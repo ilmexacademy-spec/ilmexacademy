@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ilmexacademy — Забони Англисӣ</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:    #1DA8E2;
+    --blue-dark: #0E8FC4;
+    --purple:  #A855F7;
+    --purple-btn: #9333EA;
+    --dark:    #0D0D0D;
+    --white:   #FFFFFF;
+    --light-bg: #E8F7FD;
+    --card-bg:  #D0EFFA;
+    --text-dark: #111111;
+    --text-mid:  #333333;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* ── LANGUAGE TOGGLE ── */
+  .lang-bar {
+    background: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .lang-btn {
+    padding: 6px 20px;
+    border-radius: 20px;
+    border: 2px solid var(--blue);
+    background: transparent;
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .lang-btn.active {
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--dark);
+    padding: 32px 20px 24px;
+    text-align: center;
+  }
+  .hero-logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .hero-logo span { color: var(--blue); }
+  .hero-tagline {
+    font-size: 14px;
+    color: #aaa;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    margin: 8px 12px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Free intro lesson card */
+  .card-intro {
+    background: linear-gradient(135deg, #1DA8E2 0%, #0E6EA8 100%);
+    padding: 24px 20px 20px;
+    color: white;
+  }
+  .card-eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+  .card-headline {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .checklist li::before {
+    content: '✓';
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    margin-top: 1px;
+  }
+  .note-text {
+    font-size: 12px;
+    opacity: 0.75;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  /* Buttons */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform .15s, opacity .15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn:active { transform: scale(0.97); opacity: 0.9; }
+  .btn-white { background: var(--white); color: var(--text-dark); }
+  .btn-purple { background: var(--purple-btn); color: var(--white); }
+  .btn-blue { background: var(--blue); color: var(--white); }
+  .btn-dark { background: var(--dark); color: var(--white); }
+  .btn-outline-blue {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+  }
+
+  /* ── COURSE CARD ── */
+  .card-course {
+    background: linear-gradient(135deg, #1A3A5C 0%, #0D2240 100%);
+    padding: 24px 20px 20px;
+    color: white;
+    position: relative;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--purple);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .course-stat {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .course-sub {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-bottom: 16px;
+  }
+
+  /* ── WHAT'S INCLUDED ── */
+  .card-light {
+    background: var(--light-bg);
+    padding: 24px 20px 20px;
+    color: var(--text-dark);
+  }
+  .card-light .card-headline { color: var(--text-dark); }
+  .card-light .card-eyebrow { color: var(--blue-dark); }
+  .icon-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .icon-item {
+    background: white;
+    border-radius: 14px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .icon-item .icon { font-size: 24px; margin-bottom: 6px; }
+  .icon-item .icon-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+  .icon-item .icon-sub {
+    font-size: 11px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  /* ── WHAT YOU'LL LEARN ── */
+  .card-topics {
+    background: var(--card-bg);
+    padding: 24px 20px 20px;
+    color: var(--text-dark);
+  }
+  .topics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .topic-item {
+    background: white;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+  .topic-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background: var(--blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  /* ── PRICE CARD ── */
+  .card-price {
+    background: linear-gradient(135deg, #7C3AED 0%, #4F46E5 100%);
+    padding: 24px 20px 20px;
+    color: white;
+  }
+  .price-big {
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-period {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-bottom: 16px;
+  }
+  .price-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .price-includes li {
+    list-style: none;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .price-includes li::before {
+    content: '★';
+    color: #FCD34D;
+    font-size: 12px;
+  }
+
+  /* ── SOCIAL LINKS ── */
+  .social-section {
+    padding: 8px 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    background: var(--blue);
+    transition: transform .15s, opacity .15s;
+  }
+  .social-btn:active { transform: scale(0.97); opacity: 0.9; }
+  .social-btn.telegram { background: #229ED9; }
+  .social-btn.instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .social-icon { font-size: 18px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 24px 20px;
+    text-align: center;
+    color: #555;
+    font-size: 12px;
+  }
+  .footer strong { color: #888; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-label {
+    margin: 16px 12px 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+  }
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #2a2a2a;
+  }
+
+  /* lang content */
+  .lang-tg { display: block; }
+  .lang-ru { display: none; }
+  body.ru .lang-tg { display: none; }
+  body.ru .lang-ru { display: block; }
+</style>
+</head>
+<body id="body">
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('tg')" id="btn-tg">Тоҷикӣ</button>
+  <button class="lang-btn" onclick="setLang('ru')" id="btn-ru">Русский</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">ilmex<span>academy</span></div>
+  <div class="lang-tg"><div class="hero-tagline">Мактаби забони англисӣ барои точикон</div></div>
+  <div class="lang-ru"><div class="hero-tagline">Школа английского языка для таджикоязычных</div></div>
+</div>
+
+<!-- ── FREE INTRO LESSON ── -->
+<div class="card card-intro">
+  <div class="lang-tg">
+    <div class="card-eyebrow">🎁 Дарси ройгон</div>
+    <div class="card-headline">Дарси шиносоии ройгон барои шумо!</div>
+    <ul class="checklist">
+      <li>Сатҳи забониатонро муайян мекунем</li>
+      <li>Нақшаи таълими инфиродӣ месозем</li>
+      <li>Ба саволҳои шумо ҷавоб медиҳем</li>
+      <li>Гурӯҳи мувофиқ интихоб мекунем</li>
+    </ul>
+    <div class="note-text">Агар маъқул набошад — мушкиле нест, хайрухуш мекунем 😊</div>
+    <a href="https://t.me/ilmexacademy" class="btn btn-white">Сабтном шавед →</a>
+  </div>
+  <div class="lang-ru">
+    <div class="card-eyebrow">🎁 Бесплатный урок</div>
+    <div class="card-headline">Бесплатный вводный урок для вас!</div>
+    <ul class="checklist">
+      <li>Определим ваш уровень языка</li>
+      <li>Составим индивидуальный план обучения</li>
+      <li>Ответим на все ваши вопросы</li>
+      <li>Подберём подходящую группу</li>
+    </ul>
+    <div class="note-text">Если не понравится — ничего страшного, мило попрощаемся 😊</div>
+    <a href="https://t.me/ilmexacademy" class="btn btn-white">Записаться →</a>
+  </div>
+</div>
+
+<!-- ── COURSE OVERVIEW ── -->
+<div class="card card-course">
+  <div class="lang-tg">
+    <div class="badge">⭐ Курси асосӣ</div>
+    <div class="course-stat">+1 сатҳ</div>
+    <div class="card-headline">дар 3 моҳ</div>
+    <ul class="checklist" style="margin-bottom:18px">
+      <li>Дарсҳои зинда бо муаллим — 3 маротиба дар ҳафта</li>
+      <li>Видеодарсҳои грамматикӣ — 2 маротиба дар ҳафта</li>
+      <li>Вазифаи хонагӣ бо баҳогузорӣ</li>
+      <li>Гурӯҳҳои хурд — 10-12 нафар</li>
+    </ul>
+    <a href="https://t.me/ilmexacademy" class="btn btn-purple">Бештар дар бораи курс →</a>
+  </div>
+  <div class="lang-ru">
+    <div class="badge">⭐ Основной курс</div>
+    <div class="course-stat">+1 уровень</div>
+    <div class="card-headline">за 3 месяца</div>
+    <ul class="checklist" style="margin-bottom:18px">
+      <li>Живые уроки с учителем — 3 раза в неделю</li>
+      <li>Видеоуроки по грамматике — 2 раза в неделю</li>
+      <li>Домашние задания с проверкой</li>
+      <li>Мини-группы — 10-12 человек</li>
+    </ul>
+    <a href="https://t.me/ilmexacademy" class="btn btn-purple">Подробнее о курсе →</a>
+  </div>
+</div>
+
+<!-- ── WHAT'S INCLUDED ── -->
+<div class="card card-light">
+  <div class="lang-tg">
+    <div class="card-eyebrow">ДАР КУРС ЧӢ АСТ?</div>
+    <div class="card-headline" style="margin-bottom:16px">Дар курс мавҷуд аст:</div>
+    <div class="icon-row">
+      <div class="icon-item">
+        <div class="icon">📹</div>
+        <div class="icon-label">Видеодарсҳо</div>
+        <div class="icon-sub">Грамматика ва луғат</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon">🎓</div>
+        <div class="icon-label">Дарсҳои зинда</div>
+        <div class="icon-sub">Google Meet орқали</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon">📝</div>
+        <div class="icon-label">Вазифаи хонагӣ</div>
+        <div class="icon-sub">Баҳогузорӣ шуда</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon">👥</div>
+        <div class="icon-label">Гурӯҳи хурд</div>
+        <div class="icon-sub">10-12 нафар</div>
+      </div>
+    </div>
+    <a href="https://t.me/ilmexacademy" class="btn btn-blue">Сабтном шавед →</a>
+  </div>
+  <div class="lang-ru">
+    <div class="card-eyebrow">ЧТО ВХОДИТ В КУРС?</div>
+    <div class="card-headline" style="margin-bottom:16px">В курсе есть:</div>
+    <div class="icon-row">
+      <div class="icon-item">
+        <div class="icon">📹</div>
+        <div class="icon-label">Видеоуроки</div>
+        <div class="icon-sub">Грамматика и лексика</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon">🎓</div>
+        <div class="icon-label">Живые уроки</div>
+        <div class="icon-sub">Через Google Meet</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon">📝</div>
+        <div class="icon-label">Домашние задания</div>
+        <div class="icon-sub">С проверкой</div>
+      </div>
+      <div class="icon-item">
+        <div class="icon">👥</div>
+        <div class="icon-label">Мини-группа</div>
+        <div class="icon-sub">10-12 человек</div>
+      </div>
+    </div>
+    <a href="https://t.me/ilmexacademy" class="btn btn-blue">Записаться →</a>
+  </div>
+</div>
+
+<!-- ── WHAT YOU LEARN ── -->
+<div class="card card-topics">
+  <div class="lang-tg">
+    <div class="card-eyebrow" style="color:#0E8FC4">ЧӢ ЁД МЕГИРЕД?</div>
+    <div class="card-headline" style="margin-bottom:16px; color:#111">Мавзӯъҳои асосӣ:</div>
+    <div class="topics-grid">
+      <div class="topic-item"><div class="topic-num">1</div>Алифбо ва талаффуз</div>
+      <div class="topic-item"><div class="topic-num">2</div>Present Simple ва Present Continuous</div>
+      <div class="topic-item"><div class="topic-num">3</div>Гузашта — Past Simple</div>
+      <div class="topic-item"><div class="topic-num">4</div>Оянда — Future Tense</div>
+      <div class="topic-item"><div class="topic-num">5</div>Луғати рӯзмарра</div>
+      <div class="topic-item"><div class="topic-num">6</div>Гуфтугӯ ва нутқи зинда</div>
+    </div>
+    <a href="https://t.me/ilmexacademy" class="btn btn-blue">Барномаи пурраро бубинед →</a>
+  </div>
+  <div class="lang-ru">
+    <div class="card-eyebrow" style="color:#0E8FC4">ЧТО ВЫ ИЗУЧИТЕ?</div>
+    <div class="card-headline" style="margin-bottom:16px; color:#111">Основные темы:</div>
+    <div class="topics-grid">
+      <div class="topic-item"><div class="topic-num">1</div>Алфавит и произношение</div>
+      <div class="topic-item"><div class="topic-num">2</div>Present Simple и Continuous</div>
+      <div class="topic-item"><div class="topic-num">3</div>Прошедшее время — Past Simple</div>
+      <div class="topic-item"><div class="topic-num">4</div>Будущее время — Future Tense</div>
+      <div class="topic-item"><div class="topic-num">5</div>Лексика повседневной жизни</div>
+      <div class="topic-item"><div class="topic-num">6</div>Разговорная речь и диалоги</div>
+    </div>
+    <a href="https://t.me/ilmexacademy" class="btn btn-blue">Посмотреть полную программу →</a>
+  </div>
+</div>
+
+<!-- ── PRICE ── -->
+<div class="card card-price">
+  <div class="lang-tg">
+    <div class="card-eyebrow" style="opacity:0.7">НАРХ</div>
+    <div class="price-big">Тамос гиред</div>
+    <div class="price-period">Нарх ва шартҳоро дар Телеграм муайян мекунем</div>
+    <ul class="price-includes">
+      <li>Дарсҳои зинда дохил аст</li>
+      <li>Видеодарсҳо дохил аст</li>
+      <li>Вазифаи хонагӣ бо баҳо дохил аст</li>
+      <li>Дастгирии муаллим дохил аст</li>
+    </ul>
+    <a href="https://t.me/ilmexacademy" class="btn btn-white">Нархро пурсед →</a>
+  </div>
+  <div class="lang-ru">
+    <div class="card-eyebrow" style="opacity:0.7">СТОИМОСТЬ</div>
+    <div class="price-big">Узнайте цену</div>
+    <div class="price-period">Цену и условия уточняем в Телеграме</div>
+    <ul class="price-includes">
+      <li>Живые уроки включены</li>
+      <li>Видеоуроки включены</li>
+      <li>Домашние задания с проверкой включены</li>
+      <li>Поддержка преподавателя включена</li>
+    </ul>
+    <a href="https://t.me/ilmexacademy" class="btn btn-white">Узнать стоимость →</a>
+  </div>
+</div>
+
+<!-- ── SOCIAL LINKS ── -->
+<div class="section-label"><span>Мо дар шабакаҳои иҷтимоӣ / Мы в соцсетях</span></div>
+<div class="social-section">
+  <a href="https://t.me/ilmexacademy" class="social-btn telegram">
+    <span class="social-icon">✈️</span>
+    <span class="lang-tg">Мо дар Телеграм</span>
+    <span class="lang-ru">Мы в Телеграме</span>
+  </a>
+  <a href="https://www.instagram.com/ilmex.tj?igsh=aXRzcDAzbnFocjBr" class="social-btn instagram">
+    <span class="social-icon">📸</span>
+    <span class="lang-tg">Мо дар Инстаграм</span>
+    <span class="lang-ru">Мы в Инстаграме</span>
+  </a>
+  <a href="https://ilmex.online" class="social-btn" style="background:#222; border:1px solid #444">
+    <span class="social-icon">🌐</span>
+    <span>ilmex.online</span>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Ilmexacademy</strong> · ilmex.online<br>
+  <span class="lang-tg">Мактаби забони англисӣ барои тоҷикон</span>
+  <span class="lang-ru">Школа английского для таджикоязычных</span>
+</div>
+
+<script>
+  function setLang(lang) {
+    const body = document.getElementById('body');
+    const btnTg = document.getElementById('btn-tg');
+    const btnRu = document.getElementById('btn-ru');
+    if (lang === 'ru') {
+      body.classList.add('ru');
+      btnRu.classList.add('active');
+      btnTg.classList.remove('active');
+    } else {
+      body.classList.remove('ru');
+      btnTg.classList.add('active');
+      btnRu.classList.remove('active');
+    }
+  }
+</script>
+
+</body>
+</html>
